@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title> Simple Login and Registration Sign Up Page</title>
+  </head>
+  <body>
+    <center>
+      <h1> Sign Up Page </h1>
+      {{#if emailAddressErrorMessage }}
+        <p> {{emailAddressErrorMessage}} </p>
+      {{/if}}
+      {{#if passwordErrorMessage }}
+        <p> {{passwordErrorMessage}} </p>
+      {{/if}}
+      
+      <form action="/register" method="POST">
+        <label> Email Address </label>
+        <input type="text" name="emailAddress"> <br> <br>
+        <label> Password </label>
+        <input type="password" name="password"> <br> <br>
+        <input type="submit" value="Submit">
+        <a href="/login"> Login </a>
+      </form>
+    </center>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title> Simple Login and Register Login Page </title>
+  </head>
+  <body>
+    <center>
+      <h1> Login Page</h1>
+      {{#if errorMessage }}
+        <p> {{errorMessage}} </p>
+      {{/if}}
+      <form action="/login" method="POST">
+        <label> Email Address </label>
+        <input type="text" name="emailAddress"><br><br>
+        <label> Password </label>
+        <input type="password" name="password"><br><br>
+        <input type="submit" value="Submit">
+        <a href="/sign-up"> Sign Up </a>
+      </form>
+    </center>
+  </body>
+</html>
