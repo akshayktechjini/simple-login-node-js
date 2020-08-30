@@ -5,6 +5,10 @@
   <body>
     <center>
       <h1> Login Page</h1>
+      {{#if successMessage }}
+        <p> {{successMessage}} </p>
+      {{/if}}
+      
       {{#if errorMessage }}
         <p> {{errorMessage}} </p>
       {{/if}}
@@ -15,6 +19,7 @@
         <input type="password" name="password"><br><br>
         <input type="submit" value="Submit">
         <a href="/sign-up"> Sign Up </a>
+        <a href="/forgot-password"> Forgot Password </a>
       </form>
     </center>
   </body>

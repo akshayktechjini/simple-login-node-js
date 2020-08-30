@@ -16,6 +16,9 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     minlength: 7
+  },
+  token: {
+    type: String
   }
 }, {
   timestamps: true
@@ -39,6 +42,11 @@ userSchema.pre('save', async function (next) {
   }
   next()
 })
+
+userSchema.methods.passwordValid = async function (password) {
+  const user = this
+  return await bcrypt.compare(password, user.password)
+}
 
 const User = mongoose.model('user', userSchema)
 

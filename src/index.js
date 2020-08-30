@@ -6,7 +6,7 @@ require('./db/mongoose')
 const { auth } = require('./middleware/auth')
 const registrationRouters = require('./routers/registration.js')
 const loginRouters = require('./routers/login.js')
-
+const forgotResetPasswordRouters = require('./routers/forgot-reset-change-password')
 const PORT = process.env.PORT
 
 const viewsPath = path.join(__dirname, '../template/views')
@@ -24,6 +24,7 @@ app.use(session({
 
 app.use(registrationRouters)
 app.use(loginRouters)
+app.use(forgotResetPasswordRouters)
 
 app.get('/', (req, res) => {
   res.render('homepage')
