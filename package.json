@@ -7,7 +7,7 @@
     "dev": "env-cmd -f ./config/dev.env nodemon src/index.js",
     "start": "env-cmd -f ./config/prod.env node src/index.js",
     "prod": "env-cmd -f ./config/prod.env pm2 start src/index.js --name simple-login",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "env-cmd -f ./config/test.env jest --runInBand"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +23,9 @@
     "validator": "^13.1.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "jest": "^26.4.2",
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2",
+    "supertest-session": "^4.0.0"
   }
 }
