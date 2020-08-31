@@ -23,10 +23,9 @@ router.post('/register', async (req, res) => {
     if (e.errors.password) {
       passwordErrorMessage = e.errors.password.message
     }
-    res.render('sign-up', {
-      emailAddressErrorMessage,
-      passwordErrorMessage
-    })
+    res.locals.emailAddressErrorMessage = emailAddressErrorMessage
+    res.locals.passwordErrorMessage = passwordErrorMessage
+    res.render('sign-up')
   }
 })
 

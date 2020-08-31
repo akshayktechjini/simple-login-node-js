@@ -62,6 +62,7 @@ router.post('/change-password', auth, async (req, res) => {
     user.password = req.body.newPassword
     await user.save()
     changePasswordSuccessMail()
+    res.locals.successMessage = 'Password Changed Successfully'
     res.redirect('/login')
   } else {
     res.render('change-password', {

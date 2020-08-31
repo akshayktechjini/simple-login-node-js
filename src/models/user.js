@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const userSchema = mongoose.Schema({
   emailAddress: {
     type: String,
     required: true,
+    unique: true,
     validate (value) {
       if (!validator.isEmail(value)) {
         throw new Error('Email address is not valid')
@@ -47,6 +49,8 @@ userSchema.methods.passwordValid = async function (password) {
   const user = this
   return await bcrypt.compare(password, user.password)
 }
+
+userSchema.plugin(uniqueValidator, { message: '{PATH} already registered' })
 
 const User = mongoose.model('user', userSchema)
 
