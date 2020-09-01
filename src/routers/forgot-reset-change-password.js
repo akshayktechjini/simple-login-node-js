@@ -16,7 +16,7 @@ router.post('/forgot-password', async (req, res) => {
     user.token = token
     user = await user.save()
     const resetPasswordLink = req.protocol + '://' + req.get('host') + '/reset-password/' + token
-    resetPasswordLinkMail(resetPasswordLink)
+    resetPasswordLinkMail(resetPasswordLink, user.emailAddress)
   }
   res.send('Reset Password Link has been sent to given Email Address')
 })
@@ -39,7 +39,7 @@ router.post('/reset-password', async (req, res) => {
     user.password = await req.body.password
     await user.save()
     delete req.session.token
-    await resetPasswordSuccessMail()
+    await resetPasswordSuccessMail(user.emailAddress)
     res.render('login', {
       successMessage: 'Password has been reset successfully. Login now'
     })
@@ -61,7 +61,7 @@ router.post('/change-password', auth, async (req, res) => {
   if (passwordValid) {
     user.password = req.body.newPassword
     await user.save()
-    changePasswordSuccessMail()
+    changePasswordSuccessMail(user.emailAddress)
     res.locals.successMessage = 'Password Changed Successfully'
     res.redirect('/login')
   } else {

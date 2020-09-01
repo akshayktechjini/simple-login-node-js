@@ -1,11 +1,14 @@
 const sendGrid = require('@sendgrid/mail')
 
-sendGrid.setApiKey('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')
+sendGrid.setApiKey(process.env.SENDGRID_API_KEY)
 
-const registrationSuccessMail = async () => {
+const registrationSuccessMail = async (to) => {
+  if (process.env.NODE_ENV !== 'production') {
+    to = process.env.TO_TEST_EMAIL
+  }
   const msg = {
-    to: 'akshayachar2011@gmail.com',
-    from: 'akshayachar2011@gmail.com',
+    to,
+    from: process.env.FROM_EMAIL,
     subject: 'Registration Success',
     text: 'You have successfully Registered'
   }

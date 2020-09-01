@@ -1,31 +1,40 @@
 const sendGrid = require('@sendgrid/mail')
 
-sendGrid.setApiKey('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')
+sendGrid.setApiKey(process.env.SENDGRID_API_KEY)
 
-const resetPasswordLinkMail = async (resetPasswordLink) => {
+const resetPasswordLinkMail = async (resetPasswordLink, to) => {
+  if (process.env.NODE_ENV !== 'production') {
+    to = process.env.TO_TEST_EMAIL
+  }
   const msg = {
-    to: 'akshayachar2011@gmail.com',
-    from: 'akshayachar2011@gmail.com',
+    to,
+    from: process.env.FROM_EMAIL,
     subject: 'Reset Password Request',
     html: `You can have requested for the Reset Password. <br> <br><a href=${resetPasswordLink}> Reset Password Link: </a>`
   }
   sendGrid.send(msg)
 }
 
-const resetPasswordSuccessMail = async () => {
+const resetPasswordSuccessMail = async (to) => {
+  if (process.env.NODE_ENV !== 'production') {
+    to = process.env.TO_TEST_EMAIL
+  }
   const msg = {
-    to: 'akshayachar2011@gmail.com',
-    from: 'akshayachar2011@gmail.com',
+    to,
+    from: process.env.FROM_EMAIL,
     subject: 'Reset Password Success',
     text: 'You have successfully reset the Password'
   }
   sendGrid.send(msg)
 }
 
-const changePasswordSuccessMail = async () => {
+const changePasswordSuccessMail = async (to) => {
+  if (process.env.NODE_ENV !== 'production') {
+    to = process.env.TO_TEST_EMAIL
+  }
   const msg = {
-    to: 'akshayachar2011@gmail.com',
-    from: 'akshayachar2011@gmail.com',
+    to,
+    from: process.env.FROM_EMAIL,
     subject: 'Change Password Success',
     text: 'You have successfully Changed the Password'
   }

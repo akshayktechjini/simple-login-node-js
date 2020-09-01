@@ -12,7 +12,7 @@ router.post('/register', async (req, res) => {
     const user = await new User(req.body)
     await user.save()
     req.session.user = user
-    registrationSuccessMail()
+    registrationSuccessMail(user.emailAddress)
     res.redirect('/dashboard')
   } catch (e) {
     let emailAddressErrorMessage = ''
